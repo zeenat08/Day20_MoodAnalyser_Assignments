@@ -8,7 +8,13 @@ namespace Day20_MoodAnalyser
     public class Mood_Analyser
     {
         //variable
-        string message;
+        public string message;
+
+        //Constructor with no parameter
+        public Mood_Analyser()
+        {
+
+        }
 
         //constructor with a string type parameter
         public Mood_Analyser(string message)
@@ -17,29 +23,30 @@ namespace Day20_MoodAnalyser
         }
 
         //method for checking mood
-        public string AnalyseMood()
-        {
-            //Exception Handling
-            try
+         public string AnalyseMood()
             {
-                if (this.message.Equals(string.Empty))
+                //Exception Handling
+                try
                 {
-                    throw new Mood_Analyser_Custom_Exception(Mood_Analyser_Custom_Exception.ExceptionType.EMPTY_MESSAGE, "Mood should not be EMPTY");
+                    if (this.message.Equals(string.Empty))
+                    {
+                        throw new Mood_Analyser_Custom_Exception(Mood_Analyser_Custom_Exception.ExceptionType.EMPTY_MESSAGE, "Mood should not be EMPTY");
+                        //throw new Exception();
+                    }
+                    if (this.message.ToLower().Contains("sad"))
+                        return "SAD";
+                    else
+                        return "HAPPY";
                 }
-                if (this.message.ToLower().Contains("sad"))
-                    return "SAD";
-                else if (this.message.ToLower().Contains("happy"))
-                    return "SAD";
-                
-                else
-                    return "HAPPY";
-            }
-            catch (NullReferenceException)
-            {
-                throw new Mood_Analyser_Custom_Exception(Mood_Analyser_Custom_Exception.ExceptionType.NULL_MESSAGE, "Mood Should not be NULL");
-            }
-        }
+                catch (NullReferenceException e)
+                {
+                    return e.Message; ////e used in UC2 case
+                                      //throw new MoodAnalyserCustomException(MoodAnalyserCustomException.ExceptionType.NULL_MESSAGE, "Mood Should not be NULL");
+                                      ////throw new Exception(e.Message);
+                }
 
+         }
     }
 }
+
 
